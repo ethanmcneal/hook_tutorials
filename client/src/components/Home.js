@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Clock from './Clock'
+import CardContainer from '../style_components/CardContainer'
+import Button from '../style_components/Button'
 
-const Home = () =>{
+const Home = () => {
 
     const [test, setTest] = useState([])
+    const [showClock, setShowClock] = useState(false)
 
     useEffect(()=>{
         getTest()
@@ -21,8 +25,16 @@ const Home = () =>{
     }
     return(
         <div>
-        <h1>Home Page Here {`${test}`}</h1>
         
+        <h1>Home Page Here {`${test}`}</h1>
+        <Button onClick={() => setShowClock(!showClock)}>{showClock ? 'Hide Clock' : 'Show Clock'}</Button>
+
+        {showClock && 
+        <CardContainer>
+
+        <Clock date={new Date()} />
+        
+        </CardContainer> }
         </div>
     )
 }
